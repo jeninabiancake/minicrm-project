@@ -24,10 +24,46 @@
                 </a>
             </li>
 
+            @if(user_can('list_contacts'))
+                <li class="treeview {{ Request::segment(2) == 'contacts'? 'active':'' }}">
+                    <a href="#">
+                        <i class="fa fa-address-card"></i> <span>Accounts</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="{{ Request::segment(2) == "contacts" && request('status_name') == null?"active":"" }}">
+                            <a href="{{ url('/admin/contacts') }}"><i class="fa fa-list"></i> All contacts</a>
+                        </li>
+                        <li class="{{ Request::segment(2) == "contacts" && request('status_name') == 'Lead'?"active":"" }}">
+                            <a href="{{ url('/admin/contacts?status_name=Lead') }}"><i class="fa fa-leaf"></i> Leads</a>
+                        </li>
+                        <li class="{{ Request::segment(2) == "contacts" && request('status_name') == 'Opportunity'?"active":"" }}">
+                            <a href="{{ url('/admin/contacts?status_name=Opportunity') }}"><i class="fa fa-flag"></i> Opportunities</a>
+                        </li>
+                        <li class="{{ Request::segment(2) == "contacts" && request('status_name') == 'Customer'?"active":"" }}">
+                            <a href="{{ url('/admin/contacts?status_name=Customer') }}"><i class="fa fa-user-circle"></i> Customers</a>
+                        </li>
+                        <li class="{{ Request::segment(2) == "contacts" && request('status_name') == 'Close'?"active":"" }}">
+                            <a href="{{ url('/admin/contacts?status_name=Close') }}"><i class="fa fa-ban"></i> Close</a>
+                        </li>
+                    </ul>
+                </li>
+            @endif
+
             @if(user_can('list_documents'))
                 <li class="{{ Request::segment(2) == "documents"?"active":"" }}">
                     <a href="{{ url('/admin/documents') }}">
                         <i class="fa fa-file-word-o"></i> <span>Documents</span>
+                    </a>
+                </li>
+            @endif
+
+            @if(user_can('list_tasks'))
+                <li class="{{ Request::segment(2) == "tasks"?"active":"" }}">
+                    <a href="{{ url('/admin/tasks') }}">
+                        <i class="fa fa-tasks"></i> <span>Tasks</span>
                     </a>
                 </li>
             @endif

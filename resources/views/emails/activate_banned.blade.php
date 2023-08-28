@@ -11,11 +11,11 @@
 
 @if($user->is_active == 1)
     <p>
-        Your account have been activated to access the mini CRM system <a href="{{ url('admin') }}"> {{ url('admin') }} </a>
+        Your account has been activated to access the mini CRM system <a href="{{ url('admin') }}"> {{ url('admin') }} </a>
     </p>
 @else
     <p>
-        Your account have been deactivated to access the mini CRM system <a href="{{ url('admin') }}"> {{ url('admin') }} </a>
+        Your account has been deactivated to access the mini CRM system <a href="{{ url('admin') }}"> {{ url('admin') }} </a>
     </p>
 @endif
 </body>
