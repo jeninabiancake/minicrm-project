@@ -6,9 +6,10 @@ use App\Helpers\MailerFactory;
 use App\Http\Requests;
 
 use App\Models\User;
-use App\Models\Role;
+// use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
 
 class UsersController extends Controller
 {

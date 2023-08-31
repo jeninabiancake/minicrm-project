@@ -14,78 +14,80 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     Route::get('/', function () {
         return view('pages.home.index');
     });
 
-    Route::resource('/users', 'UsersController');
+    Route::resource('/users', 'App\Http\Controllers\UsersController');
 
-    Route::get('/my-profile', 'UsersController@getProfile');
+    Route::get('/my-profile', 'App\Http\Controllers\UsersController@getProfile');
 
-    Route::get('/my-profile/edit', 'UsersController@getEditProfile');
+    Route::get('/my-profile/edit', 'App\Http\Controllers\UsersController@getEditProfile');
 
-    Route::patch('/my-profile/edit', 'UsersController@postEditProfile');
+    Route::patch('/my-profile/edit', 'App\Http\Controllers\UsersController@postEditProfile');
 
-    Route::resource('/permissions', 'PermissionsController');
+    Route::resource('/permissions', 'App\Http\Controllers\PermissionsController');
 
-    Route::resource('/roles', 'RolesController');
+    Route::resource('/roles', 'App\Http\Controllers\RolesController');
 
-    Route::get('/users/role/{id}', 'UsersController@getRole');
+    Route::get('/users/role/{id}', 'App\Http\Controllers\UsersController@getRole');
 
-    Route::put('/users/role/{id}', 'UsersController@updateRole');
+    Route::put('/users/role/{id}', 'App\Http\Controllers\UsersController@updateRole');
 
-    Route::resource('/documents', 'DocumentsController');
+    Route::resource('/documents', 'App\Http\Controllers\DocumentsController');
 
-    Route::get('/documents/{id}/assign', 'DocumentsController@getAssignDocument');
+    Route::get('/documents/{id}/assign', 'App\Http\Controllers\DocumentsController@getAssignDocument');
 
-    Route::put('/documents/{id}/assign', 'DocumentsController@postAssignDocument');
+    Route::put('/documents/{id}/assign', 'App\Http\Controllers\DocumentsController@postAssignDocument');
 
-    Route::resource('/contacts', 'ContactsController');
+    Route::resource('/contacts', 'App\Http\Controllers\ContactsController');
 
-    Route::get('/contacts/{id}/assign', 'ContactsController@getAssignContact');
+    Route::get('/contacts/{id}/assign', 'App\Http\Controllers\ContactsController@getAssignContact');
 
-    Route::put('/contacts/{id}/assign', 'ContactsController@postAssignContact');
+    Route::put('/contacts/{id}/assign', 'App\Http\Controllers\ContactsController@postAssignContact');
 
-    Route::get('/api/contacts/get-contacts-by-status', 'ContactsController@getContactsByStatus');
+    Route::get('/api/contacts/get-contacts-by-status', 'App\Http\Controllers\ContactsController@getContactsByStatus');
 
-    Route::resource('/tasks', 'TasksController');
+    Route::resource('/tasks', 'App\Http\Controllers\TasksController');
 
-    Route::get('/tasks/{id}/assign', 'TasksController@getAssignTask');
+    Route::get('/tasks/{id}/assign', 'App\Http\Controllers\TasksController@getAssignTask');
 
-    Route::put('/tasks/{id}/assign', 'TasksController@postAssignTask');
+    Route::put('/tasks/{id}/assign', 'App\Http\Controllers\TasksController@postAssignTask');
 
-    Route::get('/tasks/{id}/update-status', 'TasksController@getUpdateStatus');
+    Route::get('/tasks/{id}/update-status', 'App\Http\Controllers\TasksController@getUpdateStatus');
 
-    Route::put('/tasks/{id}/update-status', 'TasksController@postUpdateStatus');
+    Route::put('/tasks/{id}/update-status', 'App\Http\Controllers\TasksController@postUpdateStatus');
 
-    Route::get('/mailbox/{folder?}', 'MailboxController@index');
+    Route::get('/mailbox/{folder?}', 'App\Http\Controllers\MailboxController@index');
 
-    Route::get('/mailbox-create', 'MailboxController@create');
+    Route::get('/mailbox-create', 'App\Http\Controllers\MailboxController@create');
 
-    Route::post('/mailbox-create', 'MailboxController@store');
+    Route::post('/mailbox-create', 'App\Http\Controllers\MailboxController@store');
 
-    Route::get('/mailbox-show/{id}', 'MailboxController@show');
+    Route::get('/mailbox-show/{id}', 'App\Http\Controllers\MailboxController@show');
 
-    Route::put('/mailbox-toggle-important', 'MailboxController@toggleImportant');
+    Route::put('/mailbox-toggle-important', 'App\Http\Controllers\MailboxController@toggleImportant');
 
-    Route::delete('/mailbox-trash', 'MailboxController@trash');
+    Route::delete('/mailbox-trash', 'App\Http\Controllers\MailboxController@trash');
 
-    Route::get('/mailbox-reply/{id}', 'MailboxController@getReply');
+    Route::get('/mailbox-reply/{id}', 'App\Http\Controllers\MailboxController@getReply');
 
-    Route::post('/mailbox-reply/{id}', 'MailboxController@postReply');
+    Route::post('/mailbox-reply/{id}', 'App\Http\Controllers\MailboxController@postReply');
 
-    Route::get('/mailbox-forward/{id}', 'MailboxController@getForward');
+    Route::get('/mailbox-forward/{id}', 'App\Http\Controllers\MailboxController@getForward');
 
-    Route::post('/mailbox-forward/{id}', 'MailboxController@postForward');
+    Route::post('/mailbox-forward/{id}', 'App\Http\Controllers\MailboxController@postForward');
 
-    Route::get('/mailbox-send/{id}', 'MailboxController@send');
+    Route::get('/mailbox-send/{id}', 'App\Http\Controllers\MailboxController@send');
+
+    Route::get('/calendar', 'App\Http\Controllers\CalendarController@index');
 
     Route::get('/forbidden', function () {
         return view('pages.forbidden.forbidden_area');
     });
-// });
+});
 
 Route::get('/', function () {
    return redirect()->to('/admin');
