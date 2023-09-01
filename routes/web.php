@@ -94,3 +94,5 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
+//comment
