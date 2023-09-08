@@ -43,12 +43,12 @@
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <th>Id</th>
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Position Title</th>
                                     <th>Is Admin</th>
-                                    <th>Active / Banned</th>
+                                    <th>Active</th>
                                     <th>Role</th>
                                     <th>Actions</th>
                                 </tr>

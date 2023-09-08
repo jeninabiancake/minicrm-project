@@ -40,7 +40,7 @@
     <div class="form-group {{ $errors->has('is_active') ? 'has-error' : ''}}">
         <label for="is_active" class="control-label">
             <input type="checkbox" name="is_active" id="is_active" value="1" class="minimal" {{ $formMode == 'create'?"checked":($user->is_active == 1?"checked":"") }}>
-            {{ 'Active / Banned' }}
+            {{ 'Active' }}
         </label>
         {!! $errors->first('is_active', '<p class="help-block">:message</p>') !!}
     </div>

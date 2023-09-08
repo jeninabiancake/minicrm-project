@@ -83,7 +83,7 @@
                             <div class="inner">
                                 <h3>{{count(getContacts('Customer'))}}</h3>
 
-                                <p>Potential Customers</p>
+                                <p>Customers</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-pie-graph"></i>
@@ -200,11 +200,11 @@
                     @if(\Auth::user()->customers->count() > 0)
                         <div class="col-lg-3 col-xs-6">
                             <!-- small box -->
-                            <div class="small-box bg-red">
+                            <div class="small-box bg-red" id="my-customers">
                                 <div class="inner">
                                     <h3>{{ \Auth::user()->customers->count() }}</h3>
 
-                                    <p>My Potential Customers</p>
+                                    <p>My Customers</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-pie-graph"></i>

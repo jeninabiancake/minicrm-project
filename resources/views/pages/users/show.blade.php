@@ -6,7 +6,7 @@
 
     <section class="content-header">
         <h1>
-            user #{{ $user->id }}
+            <!-- user #{{ $user->id }} -->
         </h1>
 
         <ol class="breadcrumb">

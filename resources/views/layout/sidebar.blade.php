@@ -17,7 +17,7 @@
         </div>
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
-            <li class="header">MAIN NAVIGATION</li>
+            <!-- <li class="header">MAIN NAVIGATION</li> -->
             <li class="{{ Request::segment(2) == ""?"active":"" }}">
                 <a href="{{ url('/admin') }}">
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
@@ -46,7 +46,7 @@
                             <a href="{{ url('/admin/contacts?status_name=Customer') }}"><i class="fa fa-user-circle"></i> Customers</a>
                         </li>
                         <li class="{{ Request::segment(2) == "contacts" && request('status_name') == 'Close'?"active":"" }}">
-                            <a href="{{ url('/admin/contacts?status_name=Close') }}"><i class="fa fa-ban"></i> Close</a>
+                            <a href="{{ url('/admin/contacts?status_name=Close') }}"><i class="fa fa-ban"></i> Closed</a>
                         </li>
                     </ul>
                 </li>
@@ -64,6 +64,46 @@
                 <li class="{{ Request::segment(2) == "tasks"?"active":"" }}">
                     <a href="{{ url('/admin/tasks') }}">
                         <i class="fa fa-tasks"></i> <span>Tasks</span>
+                    </a>
+                </li>
+            @endif
+
+            @if(user_can('list_emails') || user_can('compose_email'))
+                <li class="treeview {{ Request::segment(2) == 'mailbox' || strpos(Request::segment(2), "mailbox")!==FALSE? 'active':'' }}">
+                    <a href="#">
+                        <i class="fa fa-envelope"></i> <span>Mailbox</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        @if(user_can('list_emails'))
+                            <li class="{{ Request::segment(2) == "mailbox" || Request::segment(3)=="" || Request::segment(3)=="Inbox"?"active":"" }}">
+                                <a href="{{ url('/admin/mailbox') }}">
+                                    Inbox
+                                    @if(count(getUnreadMessages()) > 0)
+                                        <span class="pull-right-container">
+                                            <span class="label label-primary pull-right">{{count(getUnreadMessages())}}</span>
+                                        </span>
+                                    @endif
+                                </a>
+                            </li>
+                        @endif
+                        @if(user_can('compose_email'))
+                            <li class="{{ Request::segment(2) == "mailbox-create"?"active":"" }}">
+                                <a href="{{ url('/admin/mailbox-create') }}">
+                                    Compose
+                                </a>
+                            </li>
+                        @endif
+                    </ul>
+                </li>
+            @endif
+
+            @if(user_can('show_calendar'))
+                <li class="{{ Request::segment(2) == "calendar"?"active":"" }}">
+                    <a href="{{ url('/admin/calendar') }}">
+                        <i class="fa fa-calendar"></i> <span>Calendar</span>
                     </a>
                 </li>
             @endif

@@ -39,9 +39,9 @@ class Administrator
                     $action_permission = array_pop($action_permission_array);
                     $parts = explode("-", $action_permission);
 
-                    // if (isset($parts[1]) && Auth::user()->can($parts[1])) {
-                    //     return $next($request);
-                    // }
+                    if (isset($parts[1]) && Auth::user()->can($parts[1])) {
+                        return $next($request);
+                    }
                 }
             }
         }

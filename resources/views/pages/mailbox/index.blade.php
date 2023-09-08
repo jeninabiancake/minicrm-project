@@ -25,7 +25,9 @@
 
             <div class="col-md-3">
 
-                    <a href="{{ url('admin/mailbox-create') }}" class="btn btn-primary btn-block margin-bottom">Compose</a>
+            @if(user_can('compose_email'))
+                <a href="{{ url('admin/mailbox-create') }}" class="btn btn-primary btn-block margin-bottom">Compose</a>
+            @endif
 
                 @include('pages.mailbox.includes.folders_panel')
             </div>
@@ -46,7 +48,7 @@
                         <!-- /.box-tools -->
                     </div>
 
-                    @if(!$messages->isEmpty())
+                    @if(!empty($messages))
                         <!-- /.box-header -->
                         <div class="box-body no-padding">
 

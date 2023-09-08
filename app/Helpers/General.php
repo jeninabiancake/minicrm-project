@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Contact;
 use App\Models\Setting;
 use App\Models\Mailbox;
 use App\Models\MailboxFolder;
@@ -81,7 +82,7 @@ function checkDirectory($directory)
 
             chmod(public_path('uploads/' . $directory), 0777);
         }
-    } catch (\Exception $e) {
+    } catch (Exception $e) {
         die($e->getMessage());
     }
 }
@@ -104,47 +105,40 @@ function user_can($permission)
     return Gate::allows($permission);
 }
 
+// function user_can($ability)
+// {
+//     return Auth::user()->is_admin == 1 || Gate::allows($ability);
+// }
+
+
 /**
  * get Unread Messages
  *
  *
  * @return mixed
  */
-// function getUnreadMessages()
-// {
-//     $folder = \App\Models\MailboxFolder::where('title', "Inbox")->first();
-
-//     $messages = \App\Models\Mailbox::join('mailbox_receiver', 'mailbox_receiver.mailbox_id', '=', 'mailbox.id')
-//         ->join('mailbox_user_folder', 'mailbox_user_folder.user_id', '=', 'mailbox_receiver.receiver_id')
-//         ->join('mailbox_flags', 'mailbox_flags.user_id', '=', 'mailbox_user_folder.user_id')
-//         ->where('mailbox_receiver.receiver_id', \Auth::user()->id)
-// //                          ->where('parent_id', 0)
-//         ->where('mailbox_flags.is_unread', 1)
-//         ->where('mailbox_user_folder.folder_id', $folder->id)
-//         ->where('sender_id', '!=', \Auth::user()->id)
-//         ->whereRaw('mailbox.id=mailbox_receiver.mailbox_id')
-//         ->whereRaw('mailbox.id=mailbox_flags.mailbox_id')
-//         ->whereRaw('mailbox.id=mailbox_user_folder.mailbox_id')
-//         ->select(["*", "mailbox.id as id"])
-//         ->get();
-
-//     return $messages;
-// }
-
 function getUnreadMessages()
 {
-    // Get the folder with the title "Inbox"
-    $folder = MailboxFolder::where('title', 'Inbox')->firstOrFail();
+    $folder = MailboxFolder::where('title', 'Inbox')->first();
 
-    // Get the unread messages
-    $messages = Mailbox::join('mailbox_receiver', 'mailbox_receiver.mailbox_id', '=', 'mailbox.id')
+    // Check if $folder is null
+    if ($folder === null) {
+        // Handle the case where 'Inbox' folder doesn't exist
+        // For example, you can return an empty array or throw an exception
+        return [];
+    }
+
+    $messages = \App\Models\Mailbox::join('mailbox_receiver', 'mailbox_receiver.mailbox_id', '=', 'mailbox.id')
         ->join('mailbox_user_folder', 'mailbox_user_folder.user_id', '=', 'mailbox_receiver.receiver_id')
         ->join('mailbox_flags', 'mailbox_flags.user_id', '=', 'mailbox_user_folder.user_id')
-        ->where('mailbox_receiver.receiver_id', Auth::id())
+        ->where('mailbox_receiver.receiver_id', Auth::user()->id)
         ->where('mailbox_flags.is_unread', 1)
         ->where('mailbox_user_folder.folder_id', $folder->id)
-        ->where('sender_id', '!=', Auth::id())
-        ->select('mailbox.id') // Replace with the columns you want to select
+        ->where('sender_id', '!=', Auth::user()->id)
+        ->whereRaw('mailbox.id=mailbox_receiver.mailbox_id')
+        ->whereRaw('mailbox.id=mailbox_flags.mailbox_id')
+        ->whereRaw('mailbox.id=mailbox_user_folder.mailbox_id')
+        ->select(["*", "mailbox.id as id"])
         ->get();
 
     return $messages;
@@ -160,9 +154,9 @@ function getUnreadMessages()
 function getContacts($status = null)
 {
     if(!$status)
-        return \App\Models\Contact::all();
+        return Contact::all();
 
-    return \App\Models\Contact::join('contact_status', 'contact_status.id', '=', 'contact.status')
+    return Contact::join('contact_status', 'contact_status.id', '=', 'contact.status')
         ->where('contact_status.name', $status)
         ->get();
 

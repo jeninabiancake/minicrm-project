@@ -7,10 +7,12 @@
     },
     "devDependencies": {
         "axios": "^1.1.2",
+        "grunt": "^1.6.1",
         "laravel-vite-plugin": "^0.8.0",
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "bootstrap": "^5.3.1"
+        "bootstrap": "^5.3.1",
+        "grunt-cli": "^1.4.3"
     }
 }
