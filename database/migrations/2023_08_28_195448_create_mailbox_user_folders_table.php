@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('mailbox_id')->references('id')->on('mailbox')->onDelete('cascade');
-            $table->foreign('folder_id')->references('id')->on('mailbox_folders');
+            $table->foreign('folder_id')->references('id')->on('mailbox_folder');
         });
     }
 

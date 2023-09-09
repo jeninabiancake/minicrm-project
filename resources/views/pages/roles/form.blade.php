@@ -9,10 +9,10 @@
         <h3>Permissions assigned</h3>
 
         <div class="form-group">
-            <label for="select_all" class="control-label">
+            <!-- <label for="select_all" class="control-label">
                 <input type="checkbox" id="select_all" value="1" class="minimal-red">
                 <i class="btn bg-maroon">Select / Deselect All</i>
-            </label>
+            </label> -->
         </div>
 
         <div class="row">

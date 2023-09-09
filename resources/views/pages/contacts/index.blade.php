@@ -36,7 +36,7 @@
                             <thead>
                             <tr>
                                 @if(\Auth::user()->is_admin == 1)
-                                    <th>#</th>
+                                    <th>Id</th>
                                 @endif
                                 <th>First Name</th>
                                 <th>Middle Name</th>

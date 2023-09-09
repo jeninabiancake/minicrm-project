@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('mailbox_folders', function (Blueprint $table) {
+        Schema::create('mailbox_folder', function (Blueprint $table) {
             $table->increments('id');
             $table->string("title");
             $table->string("icon");
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('mailbox_folders');
+        Schema::dropIfExists('mailbox_folder');
     }
 };

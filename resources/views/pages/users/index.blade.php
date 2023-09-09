@@ -22,7 +22,7 @@
 
                         @include('includes.flash_message')
 
-                        <a href="{{ url('/admin/users/create') }}" class="btn btn-success btn-sm pull-right" title="Add New user">
+                        <a href="{{ url('/admin/users/create') }}" class="btn btn-success btn-sm pull-right" title="Add New User">
                             <i class="fa fa-plus" aria-hidden="true"></i> Add New
                         </a>
 

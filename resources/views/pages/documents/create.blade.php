@@ -6,7 +6,7 @@
 
     <section class="content-header">
         <h1>
-            Create New document
+            Create New Document
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{ url('/admin/') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
